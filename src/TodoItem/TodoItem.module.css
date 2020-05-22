@@ -1,0 +1,37 @@
+.todoItem{
+    background-color: lightgrey;
+    border-radius: 16px;
+    margin-bottom: 2px;
+    position: relative;
+}
+.todoItem.completed{
+    background-color: darkgray;
+}
+.todoItem input.edit{
+    display: none;
+}
+.todoItem .description{
+    display: block;
+}
+.todoItem.edit input.edit{
+    display: block;
+}
+.todoItem.edit .description{
+    display: none;
+}
+.todoItem input[type='checkbox']{
+    display: block;
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    margin: 0;
+}
+.todoItem .descriptionWrapper{
+    display: inline-block;
+    max-width: calc(100% - 20px);
+    white-space: break-spaces;
+    word-break: break-word;
+}
+.todoItem.todoItem.completed .description{
+    text-decoration: line-through;
+}
