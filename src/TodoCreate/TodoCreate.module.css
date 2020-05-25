@@ -1,0 +1,8 @@
+.todoCreate input{
+    border:2px solid darkgray;
+    width: calc(100% - 36px);
+    padding: 4px;
+}
+.todoCreate{
+    padding: 4px 0;
+}

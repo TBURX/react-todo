@@ -1,0 +1,12 @@
+.DeleteButton{
+    display: block;
+    position: absolute;
+    top: 25px;
+    right: 15px;
+    margin: 0;
+    width: 13px;
+    height: 13px;
+    background: url('./assets/iconmonstr-trash-can-1.svg');
+    cursor: pointer;
+    background-size: contain;
+}

@@ -1,12 +1,14 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import s from './TodoItem.module.css'
+import DeleteButton from './DeleteButton/DeleteButton'
 
 interface Props{
     key: number,
     id: number,
     text: string,
     completed: boolean,
-    handleCompleteChange: (key:number,text:string,completed:boolean)=>void
+    handleCompleteChange: (key:number,text:string,completed:boolean)=>void,
+    handleDeleteClick: (id:number)=>void
 }
 interface State{
     text: string,
@@ -64,6 +66,14 @@ class TodoItem extends React.Component<Props,State>{
         });
         this.props.handleCompleteChange(this.props.id,this.state.text,iscompleted);
     }
+    handleDeleteClick = ()=>{
+        this.setState({
+            completed:this.state.completed,
+            editMode:false,
+            text:this.state.text
+        });
+        this.props.handleDeleteClick(this.props.id);
+    }
 
     componentDidUpdate(){
         if(this.state.editMode){
@@ -76,7 +86,7 @@ class TodoItem extends React.Component<Props,State>{
         var edit = this.state.editMode?s.edit:'';
         var classes = `${s.todoItem} ${completed} ${edit}`;
         return (
-            <div className={classes}>
+            <div className={classes} onClick={this.handleClick}>
                 <p className={s.descriptionWrapper}>
                     <input 
                             className={s.edit}
@@ -89,9 +99,10 @@ class TodoItem extends React.Component<Props,State>{
                             onBlur = {this.handleBlur}
                             ref = {this.textInput}
                         />
-                    <span className={s.description} onClick={this.handleClick}>{this.state.text}</span>                    
+                    <span className={s.description}>{this.state.text}</span>                    
                 </p>
                 <input type='checkbox' defaultChecked={this.props.completed} onChange={this.handleTaskCompleteChange}/>
+                <DeleteButton onClick={this.handleDeleteClick}/>
             </div>
         )
     }
