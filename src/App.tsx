@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import TodoItem from './TodoItem/TodoItem';
-import TodoCreate from './TodoCreate/TodoCreate';
+import TodoCreate from './components/TodoCreate/TodoCreate';
+import TodoListComponent from './components/TodoList/TodoListComponent';
 
 interface State {
-  localTodos: { id: number; text: string; completed: boolean }[]
+  localTodos: { id: number; text: string; completed: boolean }[];
 }
 
 class App extends Component<unknown, State> {
@@ -48,35 +48,11 @@ class App extends Component<unknown, State> {
     this.forceUpdate();
   };
 
-  handleDelete = (id: number): void => {
-    const itemIndex = this.state.localTodos.findIndex((t) => t.id === id);
-    if (itemIndex >= 0) {
-      this.state.localTodos.splice(itemIndex, 1);
-      localStorage.setItem('todo-items', JSON.stringify(this.state.localTodos));
-      this.forceUpdate();
-    }
-  };
-
   render(): JSX.Element {
-    const { localTodos } = this.state;
-    const activeTasks = localTodos.filter((t: { completed: boolean }) => t.completed === false);
-    const completedTasks = localTodos.filter((t: { completed: boolean }) => t.completed === true);
-    const renderedTasks = [...activeTasks, ...completedTasks].map((item) => {
-      return (
-        <TodoItem
-          key={item.id}
-          id={item.id}
-          text={item.text}
-          completed={item.completed}
-          handleCompleteChange={this.handleCompleteChange}
-          handleDeleteClick={this.handleDelete}
-        />
-      );
-    });
     return (
       <div className="App">
-        <TodoCreate handleAdd={this.handleAdd} />
-        {renderedTasks}
+        <TodoCreate />
+        <TodoListComponent />
       </div>
     );
   }

@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import s from './TodoCreate.module.css';
+import store from '../../redux/store/store';
+import { ADD_TODO } from '../../redux/reducers/todos';
 
-interface Props {
-  handleAdd: (text: string) => void;
-}
+type Props = DispatchProps;
+
 interface State {
   text: string;
 }
@@ -18,10 +20,7 @@ class TodoCreate extends React.Component<Props, State> {
 
   handleKeydown = (event: React.KeyboardEvent): void => {
     if (event.key === 'Enter') {
-      this.props.handleAdd(this.state.text);
-      this.setState({
-        text: '',
-      });
+      store.dispatch(this.props.addTodo({ text: this.state.text }));
     }
   };
 
@@ -48,4 +47,12 @@ class TodoCreate extends React.Component<Props, State> {
   }
 }
 
-export default TodoCreate;
+interface DispatchProps {
+  addTodo: typeof ADD_TODO;
+}
+
+const dispatchToProps = {
+  addTodo: ADD_TODO,
+};
+
+export default connect(null, dispatchToProps)(TodoCreate);
