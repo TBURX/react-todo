@@ -5,9 +5,7 @@ import DeleteButton from './DeleteButton/DeleteButton';
 import { TodoList } from '../../redux/store/types';
 import todosSlice from '../../redux/slices/todos';
 
-interface Props extends StateProps, DispatchProps, OwnProps {
-  key: number;
-}
+interface Props extends StateProps, DispatchProps, OwnProps {}
 
 class TodoItem extends React.Component<Props, unknown> {
   textInput: React.RefObject<HTMLInputElement>;
