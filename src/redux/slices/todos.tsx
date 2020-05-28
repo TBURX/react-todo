@@ -1,12 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-/* import {
-  ADD_TODO,
-  TOGGLE_TODO,
-  TodoActionTypes,
-  TOGGLE_EDIT_TODO,
-  UPDATE_TODO,
-  DELETE_TODO,
-} from '../store/actionTypes'; */
 import { TodoList } from '../store/types';
 
 const getLocalTodos = (): TodoList => {
@@ -62,7 +54,6 @@ const reducers = {
     if (index >= 0) {
       state[index].editMode = true;
     }
-    // updateLocalStore(state);
     return state;
   },
   TOGGLE_EDIT_OFF: (state: TodoList, action: PayloadAction<{ id: number }>) => {
@@ -70,7 +61,6 @@ const reducers = {
     if (index >= 0) {
       state[index].editMode = false;
     }
-    // updateLocalStore(state);
     return state;
   },
   UPDATE_TODO: (state: TodoList, action: PayloadAction<{ id: number; text: string }>) => {
@@ -91,19 +81,10 @@ const reducers = {
   },
 };
 
-const todoSlice = createSlice({
+const todosSlice = createSlice({
   initialState,
   name: 'TODO_SLICE',
   reducers,
 });
 
-export const {
-  ADD_TODO,
-  DELETE_TODO,
-  TOGGLE_TODO,
-  TOGGLE_EDIT_OFF,
-  TOGGLE_EDIT_ON,
-  UPDATE_TODO,
-} = todoSlice.actions;
-
-export default todoSlice.reducer;
+export default todosSlice;

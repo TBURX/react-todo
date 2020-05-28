@@ -1,37 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import s from './TodoCreate.module.css';
-import store from '../../redux/store/store';
-import { ADD_TODO } from '../../redux/reducers/todos';
+import todosSlice from '../../redux/slices/todos';
+import todoCreateSlice from '../../redux/slices/todoCreate';
 
-type Props = DispatchProps;
+interface Props extends StateProps, DispatchProps {}
 
-interface State {
-  text: string;
-}
-
-class TodoCreate extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      text: '',
-    };
-  }
-
+class TodoCreate extends React.Component<Props, unknown> {
   handleKeydown = (event: React.KeyboardEvent): void => {
     if (event.key === 'Enter') {
-      store.dispatch(this.props.addTodo({ text: this.state.text }));
+      this.props.addTodo({ text: this.props.text });
+      this.props.clear();
     }
   };
 
   handleTextChange = (event: React.ChangeEvent): void => {
-    this.setState({
-      text: (event.target as HTMLInputElement).value,
-    });
+    this.props.change({ text: (event.target as HTMLInputElement).value });
   };
 
   render(): JSX.Element {
-    const { text } = this.state;
+    const { text } = this.props;
     return (
       <div className={s.todoCreate}>
         <input
@@ -47,12 +35,24 @@ class TodoCreate extends React.Component<Props, State> {
   }
 }
 
+interface StateProps {
+  text: string;
+}
+
+const mapStateToProps = (state: { todoCreate: string }): StateProps => ({
+  text: state.todoCreate,
+});
+
 interface DispatchProps {
-  addTodo: typeof ADD_TODO;
+  addTodo: typeof todosSlice.actions.ADD_TODO;
+  change: typeof todoCreateSlice.actions.CHANGE;
+  clear: typeof todoCreateSlice.actions.CLEAR;
 }
 
 const dispatchToProps = {
-  addTodo: ADD_TODO,
+  addTodo: todosSlice.actions.ADD_TODO,
+  change: todoCreateSlice.actions.CHANGE,
+  clear: todoCreateSlice.actions.CLEAR,
 };
 
-export default connect(null, dispatchToProps)(TodoCreate);
+export default connect(mapStateToProps, dispatchToProps)(TodoCreate);

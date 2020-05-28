@@ -2,14 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import s from './TodoItem.module.css';
 import DeleteButton from './DeleteButton/DeleteButton';
-import {
-  UPDATE_TODO,
-  TOGGLE_EDIT_ON,
-  TOGGLE_EDIT_OFF,
-  TOGGLE_TODO,
-  DELETE_TODO,
-} from '../../redux/reducers/todos';
 import { TodoList } from '../../redux/store/types';
+import todosSlice from '../../redux/slices/todos';
 
 interface Props extends StateProps, DispatchProps, OwnProps {
   key: number;
@@ -112,19 +106,19 @@ const mapStateToProps = (state: { todos: TodoList }, ownProps: OwnProps): StateP
 };
 
 interface DispatchProps {
-  updateTodo: typeof UPDATE_TODO;
-  toggleEditOn: typeof TOGGLE_EDIT_ON;
-  toggleEditOff: typeof TOGGLE_EDIT_OFF;
-  toggleComplete: typeof TOGGLE_TODO;
-  delete: typeof DELETE_TODO;
+  updateTodo: typeof todosSlice.actions.UPDATE_TODO;
+  toggleEditOn: typeof todosSlice.actions.TOGGLE_EDIT_ON;
+  toggleEditOff: typeof todosSlice.actions.TOGGLE_EDIT_OFF;
+  toggleComplete: typeof todosSlice.actions.TOGGLE_TODO;
+  delete: typeof todosSlice.actions.DELETE_TODO;
 }
 
 const dispatchToProps = {
-  updateTodo: UPDATE_TODO,
-  toggleEditOn: TOGGLE_EDIT_ON,
-  toggleEditOff: TOGGLE_EDIT_OFF,
-  toggleComplete: TOGGLE_TODO,
-  delete: DELETE_TODO,
+  updateTodo: todosSlice.actions.UPDATE_TODO,
+  toggleEditOn: todosSlice.actions.TOGGLE_EDIT_ON,
+  toggleEditOff: todosSlice.actions.TOGGLE_EDIT_OFF,
+  toggleComplete: todosSlice.actions.TOGGLE_TODO,
+  delete: todosSlice.actions.DELETE_TODO,
 };
 
 export default connect(mapStateToProps, dispatchToProps)(TodoItem);

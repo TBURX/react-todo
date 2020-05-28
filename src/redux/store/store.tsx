@@ -1,5 +1,6 @@
 import { configureStore, Middleware } from '@reduxjs/toolkit';
-import todoReducer from '../reducers/todos';
+import todosSlice from '../slices/todos';
+import todoCreateSlice from '../slices/todoCreate';
 
 /**
  * Logs all actions and states after they are dispatched.
@@ -13,6 +14,9 @@ const logger: Middleware = (api) => (next) => (action) => {
   return result;
 };
 
-const store = configureStore({ reducer: { todos: todoReducer }, middleware: [logger] });
+const store = configureStore({
+  reducer: { todos: todosSlice.reducer, todoCreate: todoCreateSlice.reducer },
+  middleware: [logger],
+});
 
 export default store;
