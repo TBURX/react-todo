@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TodoItem from '../TodoItem/TodoItem';
 import { TodoList } from '../../redux/store/types';
+import { RootState } from '../../redux/store/store';
 
 type Props = StateProps;
 
@@ -19,7 +20,7 @@ interface StateProps {
   todos: TodoList;
 }
 
-const mapStateToProps = (state: { todos: TodoList }): StateProps => ({
+const mapStateToProps = (state: RootState): StateProps => ({
   todos: state.todos,
 });
 

@@ -4,6 +4,7 @@ import s from './TodoItem.module.css';
 import DeleteButton from './DeleteButton/DeleteButton';
 import { TodoList } from '../../redux/store/types';
 import todosSlice from '../../redux/slices/todos';
+import { RootState } from '../../redux/store/store';
 
 interface Props extends StateProps, DispatchProps, OwnProps {}
 
@@ -95,7 +96,7 @@ interface StateProps {
   editMode: boolean;
 }
 
-const mapStateToProps = (state: { todos: TodoList }, ownProps: OwnProps): StateProps => {
+const mapStateToProps = (state: RootState, ownProps: OwnProps): StateProps => {
   const item = state.todos.find((it) => it.id === ownProps.id);
   if (item) {
     return { text: item.text, completed: item.completed, editMode: item.editMode };

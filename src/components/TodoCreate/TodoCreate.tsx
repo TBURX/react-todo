@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import s from './TodoCreate.module.css';
 import todosSlice from '../../redux/slices/todos';
 import todoCreateSlice from '../../redux/slices/todoCreate';
+import { RootState } from '../../redux/store/store';
 
 interface Props extends StateProps, DispatchProps {}
 
@@ -39,7 +40,7 @@ interface StateProps {
   text: string;
 }
 
-const mapStateToProps = (state: { todoCreate: string }): StateProps => ({
+const mapStateToProps = (state: RootState): StateProps => ({
   text: state.todoCreate,
 });
 

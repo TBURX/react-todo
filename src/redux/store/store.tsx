@@ -1,4 +1,4 @@
-import { configureStore, Middleware } from '@reduxjs/toolkit';
+import { configureStore, Middleware, Store } from '@reduxjs/toolkit';
 import todosSlice from '../slices/todos';
 import todoCreateSlice from '../slices/todoCreate';
 
@@ -20,3 +20,5 @@ const store = configureStore({
 });
 
 export default store;
+
+export type RootState = ReturnType<typeof store.getState>;
