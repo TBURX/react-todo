@@ -1,4 +1,4 @@
-import { configureStore, Middleware, Store } from '@reduxjs/toolkit';
+import { configureStore, Middleware } from '@reduxjs/toolkit';
 import todosSlice from '../slices/todos';
 import todoCreateSlice from '../slices/todoCreate';
 
